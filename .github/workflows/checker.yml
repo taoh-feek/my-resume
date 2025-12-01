@@ -1,30 +1,15 @@
-name: Deploy Resume Page
+name: Resume File Checker
 
 on:
   push:
-    branches: [ main ] # Trigger: Run when code is pushed to the 'main' timeline
+    branches: [ main ] # 1. TRIGGER: Only run when code is pushed to the 'main' timeline
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages # Sets up the special GitHub Pages environment
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+  confirm_files:
+    runs-on: ubuntu-latest # 2. HOST: What kind of computer should the robot run on? (A fast Linux machine)
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4 # 1. Get the code from the repository
-
-      # 2. Configure the deployment paths for GitHub Pages
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      # 3. Package all files (our index.html) into a deployable "Artifact"
-      - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: '.' # Package the entire current folder (the '.')
-
-      # 4. Deploy the package to the hosting server
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - uses: actions/checkout@v4 # 3. STEP: Get a copy of the code
+      - name: Confirm the index.html file is present
+        run: |
+          echo "Robot is checking files now..."
+          ls -l index.html # Linux command to show the index.html file details
