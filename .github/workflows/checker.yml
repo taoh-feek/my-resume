@@ -1,0 +1,15 @@
+name: Resume File Checker
+
+on:
+  push:
+    branches: [ main ] # 1. TRIGGER: Only run when code is pushed to the 'main' timeline
+
+jobs:
+  confirm_files:
+    runs-on: ubuntu-latest # 2. HOST: What kind of computer should the robot run on? (A fast Linux machine)
+    steps:
+      - uses: actions/checkout@v4 # 3. STEP: Get a copy of the code
+      - name: Confirm the index.html file is present
+        run: |
+          echo "Robot is checking files now..."
+          ls -l index.html # Linux command to show the index.html file details
