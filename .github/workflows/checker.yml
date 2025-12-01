@@ -1,5 +1,9 @@
 name: Deploy Resume Page
-
+permissions:
+  contents: read
+  pages: write
+  id-token: write  # <--- THIS IS THE MAGIC LINE
+  
 on:
   push:
     branches: [ main ] # Trigger: Run when code is pushed to the 'main' timeline
